@@ -27,3 +27,15 @@ class Article(models.Model):
     class Meta:
         verbose_name = "Стаття"
         verbose_name_plural = "Статті"
+
+
+class Tag(models.Model):
+    name = models.CharField(verbose_name="Тег", max_length=255)
+    article_referring = models.ManyToManyField(Article, verbose_name="Тег до статей")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Тег"
+        verbose_name_plural = "Теги"
