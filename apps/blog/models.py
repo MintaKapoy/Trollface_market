@@ -12,12 +12,24 @@ class BlogCategory(models.Model):
         verbose_name_plural = "Категорії блога"
 
 
+class Tag(models.Model):
+    name = models.CharField(verbose_name="Тег", max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Тег"
+        verbose_name_plural = "Теги"
+
+
 class Article(models.Model):
     category = models.ForeignKey(to=BlogCategory, verbose_name="Категорії", on_delete=models.CASCADE)
     title = models.CharField(verbose_name="Заголовок", max_length=255)
     text_preview = models.TextField(verbose_name="Текст-превью", null=True, blank=True)
     text = models.TextField(verbose_name="Текст")
     publish_date = models.DateTimeField(verbose_name="Дата публікації")
+    tags = models.ManyToManyField(to=Tag, verbose_name="Тег", blank=True)
     updated_at = models.DateTimeField(verbose_name="Дата змінення", auto_now=True)
     created_at = models.DateTimeField(verbose_name="Дата ствонення", auto_now_add=True)
 
@@ -27,15 +39,3 @@ class Article(models.Model):
     class Meta:
         verbose_name = "Стаття"
         verbose_name_plural = "Статті"
-
-
-class Tag(models.Model):
-    name = models.CharField(verbose_name="Тег", max_length=255)
-    article_referring = models.ManyToManyField(Article, verbose_name="Тег до статей")
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Тег"
-        verbose_name_plural = "Теги"
