@@ -1,3 +1,4 @@
+<h2>Пошук статей по тегу {{ tag.name }}</h2>
 {% for article in tag.articles.all %}
     <h4><a href="{% url 'blog_article_view' category_id=category.id article_id=article.id %}">{{ article.title }}</a></h4>
     <p>{{ article.text_preview }}</p>
