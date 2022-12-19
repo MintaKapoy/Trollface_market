@@ -6,7 +6,7 @@
         {% for article in articles %}
             <div class="col-4 blog-item">
                 {% if article.image %}
-                    <img class="img-thumbnail" src="{{ article.image_thumbnail.url }}" alt="">
+                    <a href="{{ article.image_thumbnail.url }}"><img class="img-thumbnail" src="{{ article.image_thumbnail.url }}" alt=""></a>
                 {% else %}
                     <img class="img-thumbnail" src="{% static 'image/no-image.png' %}" alt="">
                 {% endif %}

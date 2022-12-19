@@ -6,7 +6,7 @@
         {% for category in categories %}
             <div class="col-4 blog-item">
                 {% if category.image %}
-                    <img class="img-thumbnail" src="{{ category.image.url }}" alt="">
+                    <a href="{{ category.image.url }}"><img class="img-thumbnail" src="{{ category.image.url }}" alt=""></a>
                 {% else %}
                     <img class="img-thumbnail" src="{% static 'image/no-image.png' %}" alt="">
                 {% endif %}
