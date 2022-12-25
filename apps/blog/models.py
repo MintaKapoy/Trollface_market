@@ -3,6 +3,7 @@ from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import ResizeToFill
 from django.utils.safestring import mark_safe
 from config.settings import MEDIA_ROOT
+from apps.user.models import User
 
 
 class BlogCategory(models.Model):
@@ -50,6 +51,7 @@ class Article(models.Model):
     tags = models.ManyToManyField(to=Tag, verbose_name="Тег", related_name="articles", blank=True)
     image = ProcessedImageField(verbose_name="Зображеня", upload_to="blog/article/", null=True, blank=True)
     image_thumbnail = ImageSpecField(source="image", processors=[ResizeToFill(600, 400)])
+    user = models.ForeignKey(to=User, verbose_name="Автор статті", on_delete=models.CASCADE, null=True, blank=True)
     updated_at = models.DateTimeField(verbose_name="Дата змінення", auto_now=True)
     created_at = models.DateTimeField(verbose_name="Дата ствонення", auto_now_add=True)
 
