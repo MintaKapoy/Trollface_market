@@ -8,6 +8,18 @@
 
 <p>{{ article.text }}</p>
 
+{% if article.user %}
+    <p>Ім'я автора: {{ article.user.first_name }}</p>
+    <p>Прізвисько автора: {{ article.user.last_name }}</p>
+    {% if article.user.image_tag_thumbnail %}
+        <p>Аватар автора: {{ article.user.image_tag_thumbnail }}</p>
+    {% endif %}
+{% else %}
+    <p>У статті немає автора</p>
+{% endif %}
+
+
+
 <p>
     {% for tag in article.tags.all %}
         <a href="{% url 'blog_article_view_from_tag' tag_id=tag.id %}">#{{ tag.name }}</a>&nbsp;
