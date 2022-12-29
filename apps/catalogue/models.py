@@ -10,11 +10,12 @@ from config.settings import MEDIA_ROOT
 
 class Category(MPTTModel):
     name = models.CharField(verbose_name="Назва", max_length=255)
-    slug = models.SlugField(unique=True, verbose_name="Слаг (ЧПУ)")
+    slug = models.SlugField(unique=True, verbose_name="Слаг")
     description = models.TextField(verbose_name="Опис", null=True, blank=True)
     image = ProcessedImageField(verbose_name="Зображеня", upload_to="blog/catalogue/",
                                 processors=[ResizeToFill(600, 400)], null=True, blank=True)
-    parent = TreeForeignKey(to="self", verbose_name="Батько", related_name="child", on_delete=models.CASCADE, null=True, blank=True)
+    parent = TreeForeignKey(to="self", verbose_name="Батько", related_name="child", on_delete=models.CASCADE, null=True,
+                            blank=True)
 
     def image_tag_thumbnail(self):
         if self.image:
@@ -40,3 +41,19 @@ class Category(MPTTModel):
         verbose_name = "Категорія"
         verbose_name_plural = "Категорії"
 
+
+class Product(models.Model):
+    name = models.CharField(verbose_name="Назва", max_length=255)
+    slug = models.SlugField(unique=True, verbose_name="Слаг")
+    description = models.TextField(verbose_name="Опис", null=True, blank=True)
+    quantity = models.IntegerField(verbose_name="Кількість продукту")
+    price = models.DecimalField(verbose_name='Ціна', max_digits=12, decimal_places=2, default=0)
+    created_at = models.DateTimeField(verbose_name="Дата створення")
+    updated_at = models.DateTimeField(verbose_name="Дата змінення")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукти"
