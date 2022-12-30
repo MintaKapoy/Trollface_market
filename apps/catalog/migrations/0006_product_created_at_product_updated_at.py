@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalogue', '0005_remove_product_created_at_remove_product_updated_at'),
+        ('catalog', '0005_remove_product_created_at_remove_product_updated_at'),
     ]
 
     operations = [
