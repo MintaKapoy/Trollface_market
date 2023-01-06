@@ -1,3 +1,4 @@
+{% load static %}
 <div>
 
     <h3 class="my-header">{{ category.name }}</h3>
@@ -6,7 +7,11 @@
             <div class="col-sm-12 col-md-4">
                 <div class="product">
                     <a href="{{ item.get_absolute_url }}">
-                        <img src="{{ item.main_image.image.url }}" alt="">
+                        {% if item.images %}
+                            <img src="{{ item.main_image.image.url }}" alt="">
+                         {% else %}
+                            <img src="{% static 'image/no-image.png' %}" alt="">
+                        {% endif %}
                         <b class="text-danger product-price">{{ item.price }} грн.</b>
                         <p class="product-name">{{ item.name }}</p>
                     </a>
